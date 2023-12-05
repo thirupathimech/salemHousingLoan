@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name and Time Input</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <label for="nameInput">Enter Name:</label>
+            <input type="text" class="form-control" id="nameInput" placeholder="Enter name">
+        </div>
+        <div class="col-md-6">
+            <label for="timeInput">Enter Time:</label>
+            <input type="number" class="form-control" id="timeInput" placeholder="Enter time">
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <button class="btn btn-primary" onclick="generateOutput()">Generate Output</button>
+            <button class="btn btn-success ml-2" onclick="copyToClipboard()">Copy</button>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <ul id="outputList" class="list-group"></ul>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function generateOutput() {
+        var name = $('#nameInput').val();
+        var time = $('#timeInput').val();
+
+        if (name && time && !isNaN(time)) {
+            $('#outputList').empty();
+
+            for (var i = 1; i <= time; i++) {
+                var animal = getRandomAnimal();
+                var outputItem = '<li class="list-group-item">' + name + ' is ' + animal + '.</li>';
+                $('#outputList').append(outputItem);
+            }
+        } else {
+            alert("Please enter valid name and time.");
+        }
+    }
+
+    function getRandomAnimal() {
+        var animals = ['horse', 'dog', 'cat', 'monkey', 'elephant', 'lion', 'tiger', 'giraffe'];
+        var randomIndex = Math.floor(Math.random() * animals.length);
+        return animals[randomIndex];
+    }
+
+    function copyToClipboard() {
+        var textToCopy = $('#outputList').text();
+        var dummy = $('<input>').val(textToCopy).appendTo('body').select();
+        document.execCommand('copy');
+        $('input').remove();
+        alert('Copied to clipboard: ' + textToCopy);
+    }
+</script>
+
+</body>
+</html>
