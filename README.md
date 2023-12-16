@@ -1,7 +1,7 @@
-Name and Time Input
+## Name and Time Input
 Welcome to the "Name and Time Input" application! This simple web page allows you to enter a name and a numeric time value, generating a list of random animals associated with the entered name. You can then copy this list to your clipboard for further use.
 
-Usage
+## Usage
 Enter Name and Time:
 
 In the left column, enter a name in the "Enter Name" input field.
@@ -17,9 +17,9 @@ To run the application locally, follow these steps:
 
 Clone the repository to your local machine:
 
-bash
-Copy code
-git clone https://github.com/yourusername/name-and-time-input.git
+## bash
+## Copy code
+> git clone https://github.com/yourusername/name-and-time-input.git
 Open the index.html file in your preferred web browser.
 
 Start entering names and times, generate output, and copy the results!
