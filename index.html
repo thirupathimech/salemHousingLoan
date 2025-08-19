@@ -3,68 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Name and Time Input</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Jolly Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Comic Neue', cursive;
+            background-color: #ffeadb;
+            color: #4b5563;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .card-container {
+            background-color: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 2.5rem;
+            max-width: 550px;
+            width: 100%;
+            border: 4px dashed #ff9a6b;
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card-container:hover {
+            transform: rotate(0deg);
+        }
+
+        h1 {
+            color: #ef4444;
+            text-shadow: 2px 2px 0 #fecaca;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group input {
+            border: 2px solid #a3e635;
+            background-color: #ecfccb;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #65a30d;
+            box-shadow: 0 0 0 4px rgba(163, 230, 53, 0.5);
+            outline: none;
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 0.75rem;
+            top: 0.5rem;
+            color: #65a30d;
+            pointer-events: none;
+            transition: all 0.2s ease-out;
+        }
+
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label {
+            transform: translateY(-1.2rem) scale(0.85);
+            background-color: #fff;
+            padding: 0 0.25rem;
+            left: 0.5rem;
+        }
+
+        .btn-magic {
+            background-image: linear-gradient(to right, #ff9a6b, #ff7e5f, #ff7e5f);
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px #d64d1f;
+        }
+
+        .btn-magic:hover {
+            transform: translateY(2px);
+            box-shadow: 0 2px #d64d1f;
+        }
+
+        .btn-magic:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .output-list {
+            margin-top: 1.5rem;
+            animation: bounceIn 1s ease;
+        }
+
+        .output-item {
+            background-color: #fef9c3;
+            border: 2px dashed #fcd34d;
+            border-radius: 1rem;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            animation: flyIn 0.5s ease-out forwards;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        @keyframes flyIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6">
-            <label for="nameInput">Enter Name:</label>
-            <input type="text" class="form-control" id="nameInput" placeholder="Enter name">
+<div class="card-container">
+    <h1 class="text-4xl font-bold mb-4">Jolly Generator 🤪</h1>
+    <p class="text-sm text-gray-500 mb-6">Pera um time-a kuduthu ungala kindaal pannunga!</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="input-group">
+            <input type="text" id="nameInput" class="w-full rounded-lg p-2.5 placeholder-transparent" placeholder=" ">
+            <label for="nameInput" class="absolute text-sm font-medium">Unga Peru</label>
         </div>
-        <div class="col-md-6">
-            <label for="timeInput">Enter Time:</label>
-            <input type="number" class="form-control" id="timeInput" placeholder="Enter time">
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-md-12">
-            <button class="btn btn-primary" onclick="generateOutput()">Generate Output</button>
-            <button class="btn btn-success ml-2" onclick="copyToClipboard()">Copy</button>
+        <div class="input-group">
+            <input type="number" id="timeInput" class="w-full rounded-lg p-2.5 placeholder-transparent" placeholder=" ">
+            <label for="timeInput" class="absolute text-sm font-medium">Ethana thadava?</label>
         </div>
     </div>
-    <div class="row mt-3">
-        <div class="col-md-12">
-            <ul id="outputList" class="list-group"></ul>
-        </div>
+    
+    <div class="mt-4 flex flex-col md:flex-row gap-4">
+        <button onclick="generateOutput()" class="btn-magic w-full py-3 rounded-lg font-bold">Start Kindaal! 😂</button>
+        <button onclick="copyToClipboard()" class="btn-magic w-full py-3 rounded-lg font-bold">Copy Pannunga!</button>
+    </div>
+
+    <div id="outputSection">
+        <ul id="outputList" class="output-list">
+            </ul>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     function generateOutput() {
-        var name = $('#nameInput').val();
-        var time = $('#timeInput').val();
+        const name = document.getElementById('nameInput').value.trim();
+        const time = parseInt(document.getElementById('timeInput').value);
+        const outputList = document.getElementById('outputList');
 
-        if (name && time && !isNaN(time)) {
-            $('#outputList').empty();
+        if (!name || isNaN(time) || time <= 0) {
+            alert("Perum number-um correct-a kudunga da!");
+            return;
+        }
 
-            for (var i = 1; i <= time; i++) {
-                var animal = getRandomAnimal();
-                var outputItem = '<li class="list-group-item">' + name + ' is ' + animal + '.</li>';
-                $('#outputList').append(outputItem);
-            }
-        } else {
-            alert("Please enter valid name and time.");
+        outputList.innerHTML = ''; // Clear previous content
+
+        for (let i = 0; i < time; i++) {
+            const joke = getRandomJoke();
+            const listItem = document.createElement('li');
+            listItem.textContent = `${name}, ${joke}`;
+            listItem.classList.add('output-item');
+            listItem.style.animationDelay = `${i * 0.1}s`;
+            outputList.appendChild(listItem);
         }
     }
 
-    function getRandomAnimal() {
-        var animals = ['horse', 'dog', 'cat', 'monkey', 'elephant', 'lion', 'tiger', 'giraffe'];
-        var randomIndex = Math.floor(Math.random() * animals.length);
-        return animals[randomIndex];
+    function getRandomJoke() {
+        const jokes = [
+            'puliya paathu poochai maari odaraan.',
+            'karadi-a vida moorkama irukaan.',
+            'chimpanzee kitta-irundhu aathaiyum kettu vaanguvaan.',
+            'naai-a vida nallavan nu naanum nambitten.',
+            'neeyum oru nal kaatuku raja va irukaam..!',
+            'sathiyama neeyum oru naal manushan maari pesuva da.',
+            'sathiyama neeyum oru naal manushan maari nadappa da.',
+            'neeyum oru nal sanda pottu paapom nu nenaikura da.',
+            'sandaikku alaiyara maari nadakure da.'
+        ];
+        const randomIndex = Math.floor(Math.random() * jokes.length);
+        return jokes[randomIndex];
     }
 
     function copyToClipboard() {
-        var textToCopy = $('#outputList').text();
-        var dummy = $('<input>').val(textToCopy).appendTo('body').select();
-        document.execCommand('copy');
-        $('input').remove();
-        alert('Copied to clipboard: ' + textToCopy);
+        const textToCopy = Array.from(document.getElementById('outputList').children).map(li => li.textContent).join('\n');
+        
+        if (textToCopy.trim() === "") {
+            alert("Copy pannurathuku onnum illa da!");
+            return;
+        }
+
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+                alert('Copied to clipboard da!');
+            })
+            .catch(err => {
+                console.error('Copy Failed:', err);
+                alert('Copy panna mudiyala da, sorry!');
+            });
     }
 </script>
 
