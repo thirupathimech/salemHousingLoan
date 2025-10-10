@@ -108,79 +108,80 @@
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get input values
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value;
-            
-            // Reset previous errors
-            document.getElementById('username').classList.remove('error');
-            document.getElementById('password').classList.remove('error');
-            document.getElementById('usernameError').classList.remove('show');
-            document.getElementById('passwordError').classList.remove('show');
-            document.getElementById('errorAlert').style.display = 'none';
-            
-            // Validate empty fields
-            let hasError = false;
-            
-            if (username === '') {
-                document.getElementById('username').classList.add('error');
-                document.getElementById('usernameError').classList.add('show');
-                hasError = true;
-            }
-            
-            if (password === '') {
-                document.getElementById('password').classList.add('error');
-                document.getElementById('passwordError').classList.add('show');
-                hasError = true;
-            }
-            
-            if (hasError) {
-                return;
-            }
-            
-            // Validate credentials
-            const validUsername = 'admin';
-            const validPassword = 'Pass@1234';
-            
-            if (username === validUsername && password === validPassword) {
-                // Successful login                
-                window.location.href = 'dashboard.html';
-            } else {
-                // Show error message
-                document.getElementById('errorAlert').style.display = 'block';
-                
-                if (username !== validUsername && password !== validPassword) {
-                    document.getElementById('errorMessage').textContent = 'Invalid username and password.';
-                } else if (username !== validUsername) {
-                    document.getElementById('errorMessage').textContent = 'Invalid username.';
-                } else {
-                    document.getElementById('errorMessage').textContent = 'Invalid password.';
-                }
-                
-                // Add error styling to incorrect fields
-                if (username !== validUsername) {
-                    document.getElementById('username').classList.add('error');
-                }
-                if (password !== validPassword) {
-                    document.getElementById('password').classList.add('error');
-                }
-            }
-        });
-        
-        // Clear error on input
-        document.getElementById('username').addEventListener('input', function() {
-            this.classList.remove('error');
-            document.getElementById('usernameError').classList.remove('show');
-            document.getElementById('errorAlert').style.display = 'none';
-        });
-        
-        document.getElementById('password').addEventListener('input', function() {
-            this.classList.remove('error');
-            document.getElementById('passwordError').classList.remove('show');
-            document.getElementById('errorAlert').style.display = 'none';
-        });
+		e.preventDefault();
+		
+		// Get input values
+		const username = document.getElementById('username').value.trim();
+		const password = document.getElementById('password').value;
+		
+		// Reset previous errors
+		document.getElementById('username').classList.remove('error');
+		document.getElementById('password').classList.remove('error');
+		document.getElementById('usernameError').classList.remove('show');
+		document.getElementById('passwordError').classList.remove('show');
+		document.getElementById('errorAlert').style.display = 'none';
+		
+		// Validate empty fields
+		let hasError = false;
+		
+		if (username === '') {
+			document.getElementById('username').classList.add('error');
+			document.getElementById('usernameError').classList.add('show');
+			hasError = true;
+		}
+		
+		if (password === '') {
+			document.getElementById('password').classList.add('error');
+			document.getElementById('passwordError').classList.add('show');
+			hasError = true;
+		}
+		
+		if (hasError) {
+			return;
+		}
+		
+		// Validate credentials
+		const validCredentials = [
+			{ username: 'admin', password: 'Pass@1234' },
+			{ username: 'user1@swiggy.in', password: 'Pass@234' }
+		];
+		
+		const isValidLogin = validCredentials.some(cred => 
+			username === cred.username && password === cred.password
+		);
+		
+		if (isValidLogin) {
+			// Successful login                
+			window.location.href = 'dashboard.html';
+		} else {
+			// Show error message
+			document.getElementById('errorAlert').style.display = 'block';
+			
+			// Check which fields are incorrect
+			const userExists = validCredentials.some(cred => username === cred.username);
+			
+			if (!userExists) {
+				document.getElementById('errorMessage').textContent = 'Invalid username.';
+				document.getElementById('username').classList.add('error');
+			} else {
+				document.getElementById('errorMessage').textContent = 'Invalid password.';
+				document.getElementById('password').classList.add('error');
+			}
+		}
+	});
+
+	// Clear error on input
+	document.getElementById('username').addEventListener('input', function() {
+		this.classList.remove('error');
+		document.getElementById('usernameError').classList.remove('show');
+		document.getElementById('errorAlert').style.display = 'none';
+	});
+
+	document.getElementById('password').addEventListener('input', function() {
+		this.classList.remove('error');
+		document.getElementById('passwordError').classList.remove('show');
+		document.getElementById('errorAlert').style.display = 'none';
+	});
     </script>
 </body>
 </html>
