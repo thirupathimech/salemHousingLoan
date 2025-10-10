@@ -33,6 +33,24 @@
             border: 1px solid transparent;
             border-radius: 0.25rem;
         }
+        #auth-right {
+            background: linear-gradient(135deg, #fc8019 0%, #ff6b35 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .swiggy-logo-container {
+            text-align: center;
+            padding: 2rem;
+        }
+        .swiggy-logo-container img {
+            max-width: 400px;
+            width: 80%;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+           
+        }       
     </style>
 </head>
 <body>
@@ -41,7 +59,7 @@
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
-                        <a href="index.html"><img src="assets/images/logo/Latent-logo-(2).png" alt="Logo"></a>
+                        <a href="index.html"><img src="assets/images/logo/Latent-logo.png" alt="Logo"></a>
                     </div>
                     <h1 class="auth-title">Log in</h1>
                 
@@ -78,6 +96,10 @@
             </div>
             <div class="col-lg-7 d-none d-lg-block">
                 <div id="auth-right">
+                    <div class="swiggy-logo-container">
+                        <!-- Replace this src with your actual Swiggy image path -->
+                        <img src="assets\images\logo\swiggy-logo.png" alt="Swiggy Logo">
+                    </div>
                 </div>
             </div>
         </div>
