@@ -87,8 +87,7 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>Swiggy DataTable</h3>
-                            <p class="text-subtitle text-muted">Data loaded from DataTableSwiggy.xlsx</p>
+                            <h3>Swiggy DataTable</h3>                            
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -100,11 +99,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Status Message -->
-                <section class="section">
-                    <div id="fileStatus"></div>
-                </section>
 
                 <section class="section">
                     <div class="card">
@@ -172,9 +166,6 @@
 
         // Load Excel File Automatically
         function loadExcelFile() {
-            const statusDiv = document.getElementById('fileStatus');
-            statusDiv.innerHTML = '<div class="alert alert-info">Loading data from Excel file...</div>';
-
             fetch(EXCEL_FILE)
                 .then(response => {
                     if (!response.ok) {
@@ -191,15 +182,12 @@
 
                     if (jsonData && jsonData.length > 0) {
                         populateTable(jsonData);
-                        statusDiv.innerHTML = `<div class="alert alert-success">Successfully loaded ${jsonData.length} records from Excel!</div>`;
                     } else {
-                        statusDiv.innerHTML = '<div class="alert alert-warning">No records found in Excel file!</div>';
                         initDataTable();
                     }
                 })
                 .catch(error => {
                     console.error('Error loading Excel:', error);
-                    statusDiv.innerHTML = `<div class="alert alert-danger">Error: Could not load ${EXCEL_FILE}. Please make sure the file exists in the same folder.</div>`;
                     initDataTable();
                 });
         }
