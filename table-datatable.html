@@ -224,8 +224,8 @@
                 let statusBadge = '';
                 const statusLower = status.toLowerCase();
                 
-                if (statusLower === 'delivered count' || statusLower === 'delivered') {
-                    statusBadge = '<span class="badge bg-success">Delivered Count</span>';
+                if (statusLower === 'delivered' || statusLower === 'delivered') {
+                    statusBadge = '<span class="badge bg-success">Delivered</span>';
                 } else if (statusLower === 'intransit' || statusLower === 'in transit') {
                     statusBadge = '<span class="badge bg-info">Intransit</span>';
                 } else if (statusLower === 'out for delivery') {
@@ -267,4 +267,4 @@
     <script src="assets/js/main.js"></script>
 </body>
 
-</html
+</html>
