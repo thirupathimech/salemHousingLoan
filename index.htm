@@ -11,7 +11,7 @@
     <meta property="og:description" content="Get instant housing loans in Salem with competitive rates. Calculate EMI, check eligibility, and apply online now!">
     <meta property="og:type" content="website">
     <meta name="geo.region" content="IN-TN">
-	<link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="geo.placename" content="Salem">
     <title>Salem Housing Loan Agency | Home Loans in Salem | Quick Approval | +91 9025212559</title>
     
@@ -146,12 +146,10 @@
             margin-bottom: 10px;
         }
         
-        .form-range {
-            height: 8px;
-        }
-        
-        .form-range::-webkit-slider-thumb {
-            background: #667eea;
+        .input-group-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
         }
         
         .result-card {
@@ -444,47 +442,52 @@
                     <div class="calculator-card">
                         <div class="mb-4">
                             <label class="form-label">Loan Amount (₹)</label>
-                            <input type="range" class="form-range" id="loanAmount" min="100000" max="10000000" step="100000" value="2500000">
-                            <div class="d-flex justify-content-between">
-                                <span>₹1L</span>
-                                <span class="fw-bold text-primary" id="loanAmountValue">₹25,00,000</span>
-                                <span>₹1Cr</span>
+                            <div class="input-group">
+                                <span class="input-group-text">₹</span>
+                                <input type="number" class="form-control" id="loanAmount" min="50000" max="100000000" step="10000" value="2500000">
                             </div>
                         </div>
                         
                         <div class="mb-4">
                             <label class="form-label">Interest Rate (% per annum)</label>
-                            <input type="range" class="form-range" id="interestRate" min="6" max="15" step="0.1" value="9">
-                            <div class="d-flex justify-content-between">
-                                <span>6%</span>
-                                <span class="fw-bold text-primary" id="interestRateValue">9.0%</span>
-                                <span>15%</span>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="interestRate" min="5" max="20" step="0.1" value="9">
+                                <span class="input-group-text">%</span>
                             </div>
                         </div>
                         
                         <div class="mb-4">
-                            <label class="form-label">Loan Tenure (Years)</label>
-                            <input type="range" class="form-range" id="loanTenure" min="1" max="30" value="15">
-                            <div class="d-flex justify-content-between">
-                                <span>1 Year</span>
-                                <span class="fw-bold text-primary" id="loanTenureValue">15 Years</span>
-                                <span>30 Years</span>
+                            <label class="form-label">Loan Tenure</label>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input type="number" class="form-control" id="loanTenure" min="1" max="360" value="180">
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-select" id="tenureType">
+                                        <option value="months">Months</option>
+                                        <option value="years">Years</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
+                        
+                        <button class="btn btn-primary w-100 mb-3" onclick="calculateEMI()">
+                            <i class="fas fa-calculator me-2"></i> Calculate EMI
+                        </button>
                         
                         <div class="result-card">
                             <div class="row text-center">
                                 <div class="col-md-4">
                                     <h6>Monthly EMI</h6>
-                                    <div class="result-value" id="emiResult">₹25,373</div>
+                                    <div class="result-value" id="emiResult">₹0</div>
                                 </div>
                                 <div class="col-md-4">
                                     <h6>Total Interest</h6>
-                                    <div class="result-value" id="totalInterest">₹20,67,140</div>
+                                    <div class="result-value" id="totalInterest">₹0</div>
                                 </div>
                                 <div class="col-md-4">
                                     <h6>Total Amount</h6>
-                                    <div class="result-value" id="totalAmount">₹45,67,140</div>
+                                    <div class="result-value" id="totalAmount">₹0</div>
                                 </div>
                             </div>
                         </div>
@@ -504,42 +507,49 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="cibil-card">
-                       
-                        
-                        <div class="mb-3">
-                            <label class="form-label">PAN Number</label>
-                            <input type="text" class="form-control" id="panNumber" placeholder="Enter your PAN (e.g., ABCDE1234F)">
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">Date of Birth</label>
-                            <input type="date" class="form-control" id="dob">
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">Mobile Number</label>
-                            <input type="tel" class="form-control" id="cibilMobile" placeholder="Enter 10-digit mobile number">
-                        </div>
-                        
-                        <button class="btn btn-primary btn-lg w-100" onclick="checkCIBIL()">
-                            <i class="fas fa-search me-2"></i> Check CIBIL Score
-                        </button>
-                        
-                        <div id="scoreResult" style="display: none;">
-                            <div class="score-display">
-                                <h5>Your CIBIL Score</h5>
-                                <div class="score-number" id="cibilScore">750</div>
-                                <p class="mb-0" id="scoreCategory">Excellent Credit Score</p>
+                        <form id="cibilForm" action="https://formspree.io/f/mrbyyndq" method="POST">
+                            <div class="mb-3">
+                                <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="name" id="cibilName" required placeholder="Enter your full name">
                             </div>
-                            <div class="mt-4">
-                                <h6>Score Interpretation:</h6>
-                                <ul class="list-unstyled mt-3">
-                                    <li><i class="fas fa-check-circle text-success me-2"></i> 750-900: Excellent (High loan approval chances)</li>
-                                    <li><i class="fas fa-check-circle text-info me-2"></i> 650-749: Good (Fair loan approval chances)</li>
-                                    <li><i class="fas fa-exclamation-triangle text-warning me-2"></i> 550-649: Average (Moderate approval chances)</li>
-                                    <li><i class="fas fa-times-circle text-danger me-2"></i> Below 550: Poor (Low approval chances)</li>
-                                </ul>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">PAN Number <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="pan" id="panNumber" required placeholder="Enter your PAN (e.g., ABCDE1234F)" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}">
                             </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" name="dob" id="dob" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" name="mobile" id="cibilMobile" required placeholder="Enter 10-digit mobile number" pattern="[0-9]{10}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" name="email" id="cibilEmail" placeholder="your.email@example.com">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                <i class="fas fa-search me-2"></i> Check CIBIL Score
+                            </button>
+                        </form>
+                        
+                        <div id="cibilSuccessMessage" class="alert alert-success mt-4" style="display: none;">
+                            <i class="fas fa-check-circle me-2"></i> Your CIBIL check request has been submitted successfully. We will contact you soon with your credit score report.
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h6>Score Interpretation:</h6>
+                            <ul class="list-unstyled mt-3">
+                                <li><i class="fas fa-check-circle text-success me-2"></i> 750-900: Excellent (High loan approval chances)</li>
+                                <li><i class="fas fa-check-circle text-info me-2"></i> 650-749: Good (Fair loan approval chances)</li>
+                                <li><i class="fas fa-exclamation-triangle text-warning me-2"></i> 550-649: Average (Moderate approval chances)</li>
+                                <li><i class="fas fa-times-circle text-danger me-2"></i> Below 550: Poor (Low approval chances)</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -814,14 +824,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     
     <script>
-        // EMI Calculator
+        // EMI Calculator Function
         function calculateEMI() {
             const principal = parseFloat($('#loanAmount').val());
-            const rate = parseFloat($('#interestRate').val()) / 12 / 100;
-            const time = parseFloat($('#loanTenure').val()) * 12;
+            const annualRate = parseFloat($('#interestRate').val());
+            let tenure = parseFloat($('#loanTenure').val());
+            const tenureType = $('#tenureType').val();
             
-            const emi = (principal * rate * Math.pow(1 + rate, time)) / (Math.pow(1 + rate, time) - 1);
-            const totalAmount = emi * time;
+            // Validate inputs
+            if (!principal || !annualRate || !tenure) {
+                alert('Please fill all calculator fields');
+                return;
+            }
+            
+            // Convert tenure to months if years selected
+            if (tenureType === 'years') {
+                tenure = tenure * 12;
+            }
+            
+            const monthlyRate = annualRate / 12 / 100;
+            
+            // EMI Formula: [P x R x (1+R)^N]/[(1+R)^N-1]
+            const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, tenure)) / (Math.pow(1 + monthlyRate, tenure) - 1);
+            const totalAmount = emi * tenure;
             const totalInterest = totalAmount - principal;
             
             $('#emiResult').text('₹' + Math.round(emi).toLocaleString('en-IN'));
@@ -829,62 +854,25 @@
             $('#totalAmount').text('₹' + Math.round(totalAmount).toLocaleString('en-IN'));
         }
         
-        // Update slider values
-        $('#loanAmount').on('input', function() {
-            $('#loanAmountValue').text('₹' + parseInt($(this).val()).toLocaleString('en-IN'));
-            calculateEMI();
+        // CIBIL Form Submission
+        $('#cibilForm').on('submit', function(e) {
+            // Let the form submit naturally to Formspree
+            // Show success message after submission
+            setTimeout(function() {
+                $('#successMessage').fadeIn();
+                $('#loanApplicationForm')[0].reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(function() {
+                    $('#successMessage').fadeOut();
+                }, 5000);
+            }, 1000);
         });
         
-        $('#interestRate').on('input', function() {
-            $('#interestRateValue').text(parseFloat($(this).val()).toFixed(1) + '%');
-            calculateEMI();
-        });
-        
-        $('#loanTenure').on('input', function() {
-            const years = parseInt($(this).val());
-            $('#loanTenureValue').text(years + (years === 1 ? ' Year' : ' Years'));
-            calculateEMI();
-        });
-        
-        // CIBIL Score Check (Demo)
-        function checkCIBIL() {
-            const pan = $('#panNumber').val();
-            const dob = $('#dob').val();
-            const mobile = $('#cibilMobile').val();
-            
-            if (!pan || !dob || !mobile) {
-                alert('Please fill all fields to check CIBIL score');
-                return;
-            }
-            
-            if (mobile.length !== 10) {
-                alert('Please enter a valid 10-digit mobile number');
-                return;
-            }
-            
-            // Generate random score between 550-850
-            const score = Math.floor(Math.random() * 300) + 550;
-            let category = '';
-            
-            if (score >= 750) {
-                category = 'Excellent Credit Score';
-            } else if (score >= 650) {
-                category = 'Good Credit Score';
-            } else if (score >= 550) {
-                category = 'Average Credit Score';
-            } else {
-                category = 'Poor Credit Score';
-            }
-            
-            $('#cibilScore').text(score);
-            $('#scoreCategory').text(category);
-            $('#scoreResult').fadeIn();
-        }
-        
-        // Form Submission
+        // Loan Application Form Submission
         $('#loanApplicationForm').on('submit', function(e) {
-            // Form will be submitted to Formspree
-            // Show success message after a brief delay
+            // Let the form submit naturally to Formspree
+            // Show success message after submission
             setTimeout(function() {
                 $('#successMessage').fadeIn();
                 $('#loanApplicationForm')[0].reset();
