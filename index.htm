@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Salem Housing Loan Agency - Get instant home loans, personal loans, and business loans in Salem. Calculate EMI, check CIBIL score, and apply online with quick approval. Best housing loan rates in Salem, Tamil Nadu.">
+    <meta name="keywords" content="housing loan salem, home loan salem, loan agency salem, salem housing loan, housing finance salem, home loan tamil nadu, loan calculator, EMI calculator, CIBIL check, personal loan salem, business loan salem, property loan salem">
+    <meta name="author" content="Salem Housing Loan Agency">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Salem Housing Loan Agency - Quick Home Loan Approval">
+    <meta property="og:description" content="Get instant housing loans in Salem with competitive rates. Calculate EMI, check eligibility, and apply online now!">
+    <meta property="og:type" content="website">
+    <meta name="geo.region" content="IN-TN">
+    <meta name="geo.placename" content="Salem">
+    <title>Salem Housing Loan Agency | Home Loans in Salem | Quick Approval | +91 9025212559</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* Header Styles */
+        .top-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 0;
+        }
+        
+        .navbar {
+            background: white !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea !important;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,112C1248,107,1344,117,1392,122.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        /* Calculator Section */
+        .calculator-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .calculator-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .form-range {
+            height: 8px;
+        }
+        
+        .form-range::-webkit-slider-thumb {
+            background: #667eea;
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        /* CIBIL Section */
+        .cibil-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .cibil-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .score-display {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+            margin-top: 30px;
+        }
+        
+        .score-number {
+            font-size: 4rem;
+            font-weight: 700;
+        }
+        
+        /* Loan Types Table */
+        .loan-table-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .table-responsive {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .custom-table {
+            margin: 0;
+        }
+        
+        .custom-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .custom-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        /* Application Form */
+        .application-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .application-form {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .application-form label {
+            color: #333;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            padding: 15px 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: transform 0.3s;
+        }
+        
+        .btn-submit:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer a {
+            color: #9fa5b5;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer a:hover {
+            color: #667eea;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .result-value {
+                font-size: 2rem;
+            }
+            
+            .score-number {
+                font-size: 3rem;
+            }
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+        
+        .contact-info {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <i class="fas fa-phone-alt"></i> <a href="tel:+919025212559" class="text-white text-decoration-none">+91 9025212559</a>
+                </div>
+                <div class="col-md-6 text-end">
+                    <i class="fas fa-envelope"></i> <a href="mailto:balajimani1935@gmail.com" class="text-white text-decoration-none">balajimani1935@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-home"></i> Salem Housing Loan Agency
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#calculator">EMI Calculator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#cibil">CIBIL Check</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#loans">Loan Types</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#apply">Apply Now</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="hero-title">Your Dream Home Awaits</h1>
+                    <p class="lead mb-4">Get instant home loans with competitive interest rates. Quick approval, minimal documentation, and hassle-free process in Salem.</p>
+                    <a href="#apply" class="btn btn-light btn-lg px-5 py-3 rounded-pill">
+                        <i class="fas fa-file-alt me-2"></i> Apply Now
+                    </a>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <i class="fas fa-house-user" style="font-size: 15rem; opacity: 0.2;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Why Choose Us</h2>
+                <p class="text-muted">Experience the best loan services in Salem</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-bolt feature-icon"></i>
+                        <h4>Quick Approval</h4>
+                        <p>Get loan approval within 24 hours with minimal documentation</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-percent feature-icon"></i>
+                        <h4>Low Interest Rates</h4>
+                        <p>Competitive interest rates starting from 8.5% per annum</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt feature-icon"></i>
+                        <h4>Secure Process</h4>
+                        <p>100% secure and transparent loan processing</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-users feature-icon"></i>
+                        <h4>Expert Guidance</h4>
+                        <p>Dedicated relationship managers to assist you</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-calculator feature-icon"></i>
+                        <h4>Flexible Tenure</h4>
+                        <p>Loan tenure from 1 to 30 years based on your needs</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt feature-icon"></i>
+                        <h4>Digital Process</h4>
+                        <p>Apply online from anywhere, anytime</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EMI Calculator Section -->
+    <section class="calculator-section" id="calculator">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">EMI Calculator</h2>
+                <p class="text-muted">Calculate your monthly EMI instantly</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="calculator-card">
+                        <div class="mb-4">
+                            <label class="form-label">Loan Amount (₹)</label>
+                            <input type="range" class="form-range" id="loanAmount" min="100000" max="10000000" step="100000" value="2500000">
+                            <div class="d-flex justify-content-between">
+                                <span>₹1L</span>
+                                <span class="fw-bold text-primary" id="loanAmountValue">₹25,00,000</span>
+                                <span>₹1Cr</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label">Interest Rate (% per annum)</label>
+                            <input type="range" class="form-range" id="interestRate" min="6" max="15" step="0.1" value="9">
+                            <div class="d-flex justify-content-between">
+                                <span>6%</span>
+                                <span class="fw-bold text-primary" id="interestRateValue">9.0%</span>
+                                <span>15%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label">Loan Tenure (Years)</label>
+                            <input type="range" class="form-range" id="loanTenure" min="1" max="30" value="15">
+                            <div class="d-flex justify-content-between">
+                                <span>1 Year</span>
+                                <span class="fw-bold text-primary" id="loanTenureValue">15 Years</span>
+                                <span>30 Years</span>
+                            </div>
+                        </div>
+                        
+                        <div class="result-card">
+                            <div class="row text-center">
+                                <div class="col-md-4">
+                                    <h6>Monthly EMI</h6>
+                                    <div class="result-value" id="emiResult">₹25,373</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6>Total Interest</h6>
+                                    <div class="result-value" id="totalInterest">₹20,67,140</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6>Total Amount</h6>
+                                    <div class="result-value" id="totalAmount">₹45,67,140</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CIBIL Check Section -->
+    <section class="cibil-section" id="cibil">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Check Your CIBIL Score</h2>
+                <p class="text-muted">Know your credit score for better loan eligibility</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="cibil-card">
+                       
+                        
+                        <div class="mb-3">
+                            <label class="form-label">PAN Number</label>
+                            <input type="text" class="form-control" id="panNumber" placeholder="Enter your PAN (e.g., ABCDE1234F)">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control" id="dob">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Mobile Number</label>
+                            <input type="tel" class="form-control" id="cibilMobile" placeholder="Enter 10-digit mobile number">
+                        </div>
+                        
+                        <button class="btn btn-primary btn-lg w-100" onclick="checkCIBIL()">
+                            <i class="fas fa-search me-2"></i> Check CIBIL Score
+                        </button>
+                        
+                        <div id="scoreResult" style="display: none;">
+                            <div class="score-display">
+                                <h5>Your CIBIL Score</h5>
+                                <div class="score-number" id="cibilScore">750</div>
+                                <p class="mb-0" id="scoreCategory">Excellent Credit Score</p>
+                            </div>
+                            <div class="mt-4">
+                                <h6>Score Interpretation:</h6>
+                                <ul class="list-unstyled mt-3">
+                                    <li><i class="fas fa-check-circle text-success me-2"></i> 750-900: Excellent (High loan approval chances)</li>
+                                    <li><i class="fas fa-check-circle text-info me-2"></i> 650-749: Good (Fair loan approval chances)</li>
+                                    <li><i class="fas fa-exclamation-triangle text-warning me-2"></i> 550-649: Average (Moderate approval chances)</li>
+                                    <li><i class="fas fa-times-circle text-danger me-2"></i> Below 550: Poor (Low approval chances)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loan Types Table Section -->
+    <section class="loan-table-section" id="loans">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Our Loan Products</h2>
+                <p class="text-muted">Choose the perfect loan for your needs</p>
+            </div>
+            <div class="table-responsive">
+                <table class="table custom-table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Loan Type</th>
+                            <th>Interest Rate</th>
+                            <th>Maximum Amount</th>
+                            <th>Tenure</th>
+                            <th>Processing Fee</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fas fa-home text-primary me-2"></i> Home Loan</td>
+                            <td>8.5% - 10.5%</td>
+                            <td>₹1 Crore</td>
+                            <td>Up to 30 years</td>
+                            <td>0.5% - 1%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-building text-success me-2"></i> Plot Loan</td>
+                            <td>9.0% - 11.0%</td>
+                            <td>₹50 Lakhs</td>
+                            <td>Up to 15 years</td>
+                            <td>1% - 1.5%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-tools text-warning me-2"></i> Construction Loan</td>
+                            <td>9.5% - 11.5%</td>
+                            <td>₹75 Lakhs</td>
+                            <td>Up to 20 years</td>
+                            <td>0.5% - 1%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-key text-info me-2"></i> Property Purchase</td>
+                            <td>8.75% - 10.75%</td>
+                            <td>₹1 Crore</td>
+                            <td>Up to 25 years</td>
+                            <td>0.5% - 1%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-hand-holding-usd text-danger me-2"></i> Loan Against Property</td>
+                            <td>10.0% - 12.0%</td>
+                            <td>₹50 Lakhs</td>
+                            <td>Up to 15 years</td>
+                            <td>1% - 2%</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-sync-alt text-secondary me-2"></i> Balance Transfer</td>
+                            <td>8.25% - 10.25%</td>
+                            <td>Existing Loan Amount</td>
+                            <td>Remaining Tenure</td>
+                            <td>0.25% - 0.5%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <div class="contact-info">
+                        <h5 class="mb-4">Required Documents</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> PAN Card & Aadhaar Card</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Last 6 months Bank Statement</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Income Proof (Salary Slip/ITR)</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Property Documents</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Passport Size Photographs</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="contact-info">
+                        <h5 class="mb-4">Eligibility Criteria</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-user text-primary me-2"></i> Age: 21 to 65 years</li>
+                            <li class="mb-2"><i class="fas fa-briefcase text-primary me-2"></i> Salaried or Self-employed</li>
+                            <li class="mb-2"><i class="fas fa-chart-line text-primary me-2"></i> CIBIL Score: 650+</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section class="application-section" id="apply">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title text-white">Apply for Loan</h2>
+                <p class="text-white">Fill the form below and our team will contact you soon</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="application-form">
+                        <form id="loanApplicationForm" action="https://formspree.io/f/xovkkgpg" method="POST">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="name" required placeholder="Enter your full name">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                                    <input type="tel" class="form-control" name="mobile" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" name="email" placeholder="your.email@example.com">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Complete Address <span class="text-danger">*</span></label>
+                                <textarea class="form-control" name="address" rows="3" required placeholder="Enter your full address with pincode"></textarea>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Loan Type <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="loanType" required>
+                                        <option value="">Select loan type</option>
+                                        <option value="Home Loan">Home Loan</option>
+                                        <option value="Plot Loan">Plot Loan</option>
+                                        <option value="Construction Loan">Construction Loan</option>
+                                        <option value="Property Purchase">Property Purchase</option>
+                                        <option value="Loan Against Property">Loan Against Property</option>
+                                        <option value="Balance Transfer">Balance Transfer</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Loan Amount Required (₹) <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="loanAmount" required placeholder="Enter amount in rupees" min="50000">
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Monthly Income (₹)</label>
+                                    <input type="number" class="form-control" name="monthlyIncome" placeholder="Your monthly income" min="0">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Employment Type</label>
+                                    <select class="form-select" name="employmentType">
+                                        <option value="">Select type</option>
+                                        <option value="Salaried">Salaried</option>
+                                        <option value="Self-Employed">Self-Employed</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Additional Information</label>
+                                <textarea class="form-control" name="additionalInfo" rows="3" placeholder="Any specific requirements or queries..."></textarea>
+                            </div>
+                            
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                                <label class="form-check-label" for="agreeTerms">
+                                    I agree to the terms and conditions and authorize Salem Housing Loan Agency to contact me.
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-submit btn-primary w-100">
+                                <i class="fas fa-paper-plane me-2"></i> Submit Application
+                            </button>
+                        </form>
+                        
+                        <div id="successMessage" class="alert alert-success mt-4" style="display: none;">
+                            <i class="fas fa-check-circle me-2"></i> Thank you! Your application has been submitted successfully. We will contact you soon.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center mb-4">
+                    <div class="contact-item justify-content-center">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <div>
+                            <h6>Location</h6>
+                            <p class="text-muted mb-0">Salem, Tamil Nadu</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="contact-item justify-content-center">
+                        <i class="fas fa-phone contact-icon"></i>
+                        <div>
+                            <h6>Call Us</h6>
+                            <p class="mb-0"><a href="tel:+919025212559" class="text-decoration-none">+91 9025212559</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="contact-item justify-content-center">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <div>
+                            <h6>Email Us</h6>
+                            <p class="mb-0"><a href="mailto:balajimani1935@gmail.com" class="text-decoration-none">balajimani1935@gmail.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">Salem Housing Loan Agency</h5>
+                    <p class="text-muted">Your trusted partner for all housing loan needs in Salem. We provide quick, transparent, and hassle-free loan services.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home">Home</a></li>
+                        <li class="mb-2"><a href="#calculator">EMI Calculator</a></li>
+                        <li class="mb-2"><a href="#cibil">CIBIL Check</a></li>
+                        <li class="mb-2"><a href="#loans">Loan Products</a></li>
+                        <li class="mb-2"><a href="#apply">Apply Now</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">Connect With Us</h5>
+                    <p class="text-muted">Contact: <a href="tel:+919025212559">+91 9025212559</a></p>
+                    <p class="text-muted">Email: <a href="mailto:balajimani1935@gmail.com">balajimani1935@gmail.com</a></p>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-whatsapp fa-2x"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-secondary">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 Salem Housing Loan Agency. All rights reserved. | Designed for Best Loan Services in Salem</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" class="btn btn-primary" style="position: fixed; bottom: 20px; right: 20px; display: none; z-index: 999; border-radius: 50%; width: 50px; height: 50px;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    
+    <script>
+        // EMI Calculator
+        function calculateEMI() {
+            const principal = parseFloat($('#loanAmount').val());
+            const rate = parseFloat($('#interestRate').val()) / 12 / 100;
+            const time = parseFloat($('#loanTenure').val()) * 12;
+            
+            const emi = (principal * rate * Math.pow(1 + rate, time)) / (Math.pow(1 + rate, time) - 1);
+            const totalAmount = emi * time;
+            const totalInterest = totalAmount - principal;
+            
+            $('#emiResult').text('₹' + Math.round(emi).toLocaleString('en-IN'));
+            $('#totalInterest').text('₹' + Math.round(totalInterest).toLocaleString('en-IN'));
+            $('#totalAmount').text('₹' + Math.round(totalAmount).toLocaleString('en-IN'));
+        }
+        
+        // Update slider values
+        $('#loanAmount').on('input', function() {
+            $('#loanAmountValue').text('₹' + parseInt($(this).val()).toLocaleString('en-IN'));
+            calculateEMI();
+        });
+        
+        $('#interestRate').on('input', function() {
+            $('#interestRateValue').text(parseFloat($(this).val()).toFixed(1) + '%');
+            calculateEMI();
+        });
+        
+        $('#loanTenure').on('input', function() {
+            const years = parseInt($(this).val());
+            $('#loanTenureValue').text(years + (years === 1 ? ' Year' : ' Years'));
+            calculateEMI();
+        });
+        
+        // CIBIL Score Check (Demo)
+        function checkCIBIL() {
+            const pan = $('#panNumber').val();
+            const dob = $('#dob').val();
+            const mobile = $('#cibilMobile').val();
+            
+            if (!pan || !dob || !mobile) {
+                alert('Please fill all fields to check CIBIL score');
+                return;
+            }
+            
+            if (mobile.length !== 10) {
+                alert('Please enter a valid 10-digit mobile number');
+                return;
+            }
+            
+            // Generate random score between 550-850
+            const score = Math.floor(Math.random() * 300) + 550;
+            let category = '';
+            
+            if (score >= 750) {
+                category = 'Excellent Credit Score';
+            } else if (score >= 650) {
+                category = 'Good Credit Score';
+            } else if (score >= 550) {
+                category = 'Average Credit Score';
+            } else {
+                category = 'Poor Credit Score';
+            }
+            
+            $('#cibilScore').text(score);
+            $('#scoreCategory').text(category);
+            $('#scoreResult').fadeIn();
+        }
+        
+        // Form Submission
+        $('#loanApplicationForm').on('submit', function(e) {
+            // Form will be submitted to Formspree
+            // Show success message after a brief delay
+            setTimeout(function() {
+                $('#successMessage').fadeIn();
+                $('#loanApplicationForm')[0].reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(function() {
+                    $('#successMessage').fadeOut();
+                }, 5000);
+            }, 1000);
+        });
+        
+        // Smooth Scrolling
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            const target = $(this.getAttribute('href'));
+            if (target.length) {
+                $('html, body').stop().animate({
+                    scrollTop: target.offset().top - 70
+                }, 1000);
+            }
+        });
+        
+        // Scroll to Top Button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 300) {
+                $('#scrollTop').fadeIn();
+            } else {
+                $('#scrollTop').fadeOut();
+            }
+        });
+        
+        $('#scrollTop').click(function() {
+            $('html, body').animate({scrollTop: 0}, 800);
+            return false;
+        });
+        
+        // Initialize calculator on page load
+        $(document).ready(function() {
+            calculateEMI();
+        });
+    </script>
+</body>
+</html>
