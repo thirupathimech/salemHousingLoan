@@ -13,17 +13,28 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta name="geo.placename" content="Salem">
     <title>Salem Housing Loan Agency | Home Loans in Salem | Quick Approval | +91 9025212559</title>
-	<meta name="description" content="Looking for a housing loan in Salem? Get the best home loan offers with instant approval, low interest rates, and easy EMI. Apply online now!">
+    <meta name="description" content="Looking for a housing loan in Salem? Get the best home loan offers with instant approval, low interest rates, and easy EMI. Apply online now!">
 
-    
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --border-radius: 15px;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -33,32 +44,133 @@
         body {
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 5px;
+        }
+        
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .preloader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         /* Header Styles */
         .top-bar {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
-            padding: 10px 0;
+            padding: 8px 0;
+            font-size: 0.9rem;
         }
         
         .navbar {
             background: white !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            padding: 15px 0;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
         
         .navbar-brand {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #667eea !important;
+            color: var(--primary-color) !important;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin: 0 10px;
+            color: var(--text-color) !important;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover::after,
+        .navbar-nav .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .navbar-toggler {
+            border: none;
+            padding: 5px;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28102, 126, 234, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
         
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
-            padding: 100px 0 80px;
+            padding: 120px 0 100px;
             position: relative;
             overflow: hidden;
         }
@@ -81,207 +193,61 @@
         }
         
         .hero-title {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 20px;
-            animation: fadeInUp 1s ease;
+            margin-bottom: 25px;
+            line-height: 1.2;
         }
         
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .btn-hero {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .hero-image {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-image i {
+            font-size: 15rem;
+            opacity: 0.2;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
         }
         
         /* Features Section */
         .features-section {
-            padding: 80px 0;
-            background: #f8f9fa;
+            padding: 100px 0;
+            background: var(--light-color);
         }
         
-        .feature-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
+        .section-header {
             text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin-bottom: 30px;
-            height: 100%;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-        }
-        
-        /* Calculator Section */
-        .calculator-section {
-            padding: 80px 0;
-            background: white;
-        }
-        
-        .calculator-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        
-        .form-label {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
-        }
-        
-        .input-group-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-        }
-        
-        .result-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-top: 30px;
-        }
-        
-        .result-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 10px 0;
-        }
-        
-        /* CIBIL Section */
-        .cibil-section {
-            padding: 80px 0;
-            background: #f8f9fa;
-        }
-        
-        .cibil-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        
-        .score-display {
-            text-align: center;
-            padding: 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            color: white;
-            margin-top: 30px;
-        }
-        
-        .score-number {
-            font-size: 4rem;
-            font-weight: 700;
-        }
-        
-        /* Loan Types Table */
-        .loan-table-section {
-            padding: 80px 0;
-            background: white;
-        }
-        
-        .table-responsive {
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        .custom-table {
-            margin: 0;
-        }
-        
-        .custom-table thead {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        
-        .custom-table tbody tr:hover {
-            background: #f8f9fa;
-        }
-        
-        /* Application Form */
-        .application-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        
-        .application-form {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-        
-        .application-form label {
-            color: #333;
-        }
-        
-        .btn-submit {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            padding: 15px 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: transform 0.3s;
-        }
-        
-        .btn-submit:hover {
-            transform: scale(1.05);
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-        }
-        
-        /* Footer */
-        .footer {
-            background: #1a1a2e;
-            color: white;
-            padding: 40px 0 20px;
-        }
-        
-        .footer a {
-            color: #9fa5b5;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer a:hover {
-            color: #667eea;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-            
-            .result-value {
-                font-size: 2rem;
-            }
-            
-            .score-number {
-                font-size: 3rem;
-            }
+            margin-bottom: 60px;
         }
         
         .section-title {
@@ -296,64 +262,782 @@
             content: '';
             position: absolute;
             bottom: -10px;
-            left: 0;
-            width: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
             height: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             border-radius: 2px;
         }
         
-        .contact-info {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        .section-subtitle {
+            color: #6c757d;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
-        .contact-item {
+        .feature-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            color: #6c757d;
+            font-size: 0.95rem;
+        }
+        
+        /* Calculator Section */
+        .calculator-section {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .calculator-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .calculator-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+        
+        .form-control, .form-select {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+        }
+        
+        .input-group-text {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            border-radius: 8px 0 0 8px;
+        }
+        
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .result-item {
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .result-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        
+        .result-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        
+        /* CIBIL Section */
+        .cibil-section {
+            padding: 100px 0;
+            background: var(--light-color);
+        }
+        
+        .cibil-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .cibil-form {
+            position: relative;
+        }
+        
+        .cibil-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+        
+        .btn-cibil {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cibil:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .score-interpretation {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .score-item {
             display: flex;
             align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .score-item i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .score-excellent { color: #28a745; }
+        .score-good { color: #17a2b8; }
+        .score-average { color: #ffc107; }
+        .score-poor { color: #dc3545; }
+        
+        /* Loan Types Table Section */
+        .loan-table-section {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .custom-table {
+            margin: 0;
+        }
+        
+        .custom-table thead {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+        
+        .custom-table th {
+            font-weight: 600;
+            padding: 15px;
+            border: none;
+        }
+        
+        .custom-table td {
+            padding: 15px;
+            vertical-align: middle;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .custom-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .loan-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-top: 40px;
+        }
+        
+        .info-title {
+            font-size: 1.3rem;
+            font-weight: 600;
             margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-list i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        /* Application Form Section */
+        .application-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .application-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,112C1248,107,1344,117,1392,122.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        .application-form {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .application-form label {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 0;
+            background: var(--light-color);
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
         
         .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .contact-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info {
+            color: #6c757d;
+        }
+        
+        .contact-info a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-info a:hover {
+            color: var(--secondary-color);
+        }
+        
+        /* Map Section */
+        .map-section {
+            padding: 0;
+            height: 400px;
+        }
+        
+        .map-container {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-brand {
             font-size: 1.5rem;
-            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-description {
+            color: #9fa5b5;
+            margin-bottom: 30px;
+        }
+        
+        .footer-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #9fa5b5;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 40px;
+            padding-top: 20px;
+            text-align: center;
+            color: #9fa5b5;
+        }
+        
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+        
+        /* Floating Action Button */
+        .fab-container {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 999;
+        }
+        
+        .fab-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .fab-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+        }
+        
+        .fab-tooltip {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .fab-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--dark-color);
+        }
+        
+        .fab-container:hover .fab-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            max-width: 350px;
+        }
+        
+        .success-message.show {
+            transform: translateX(0);
+        }
+        
+        .success-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #28a745;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .success-content h5 {
+            margin: 0 0 5px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+        
+        .success-content p {
+            margin: 0;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 991px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .navbar-nav {
+                background: white;
+                padding: 20px;
+                border-radius: var(--border-radius);
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                margin-top: 20px;
+            }
+            
+            .navbar-nav .nav-link {
+                margin: 10px 0;
+                padding: 10px 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            
+            .navbar-nav .nav-link:last-child {
+                border-bottom: none;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .hero-section {
+                padding: 100px 0 80px;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .features-section, .calculator-section, .cibil-section, .loan-table-section, .application-section, .contact-section {
+                padding: 70px 0;
+            }
+            
+            .feature-card, .calculator-card, .cibil-card, .application-form {
+                padding: 30px 20px;
+            }
+            
+            .result-value {
+                font-size: 1.8rem;
+            }
+            
+            .table-responsive {
+                font-size: 0.9rem;
+            }
+            
+            .fab-container {
+                bottom: 20px;
+                left: 20px;
+            }
+            
+            .fab-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+            
+            .success-message {
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .result-value {
+                font-size: 1.5rem;
+            }
+            
+            .btn-hero, .btn-calculate, .btn-cibil, .btn-submit {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
         }
     </style>
-	<script type="application/ld+json">
-	{
-	  "@context": "https://schema.org",
-	  "@type": "LocalBusiness",
-	  "name": "Salem Housing Loan Agency",
-	  "image": "https://www.salemhousingloan.com//logo.png",
-	  "telephone": "+91-9025212559",
-	  "address": {
-		"@type": "PostalAddress",
-		"streetAddress": "Tharamangalam Main Road, Omalur, Salem",
-		"addressLocality": "Salem",
-		"addressRegion": "Tamil Nadu",
-		"postalCode": "636455",
-		"addressCountry": "IN"
-	  },
-	  "url": "https://www.salemhousingloan.com/",
-	  "priceRange": "₹₹",
-	  "openingHours": "Mo-Sa 09:00-18:00"
-	}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Salem Housing Loan Agency",
+      "image": "https://www.salemhousingloan.com//logo.png",
+      "telephone": "+91-9025212559",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Tharamangalam Main Road, Omalur, Salem",
+        "addressLocality": "Salem",
+        "addressRegion": "Tamil Nadu",
+        "postalCode": "636455",
+        "addressCountry": "IN"
+      },
+      "url": "https://www.salemhousingloan.com/",
+      "priceRange": "₹₹",
+      "openingHours": "Mo-Sa 09:00-18:00"
+    }
 </script>
 
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="spinner"></div>
+    </div>
+    
     <!-- Top Bar -->
     <div class="top-bar">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <i class="fas fa-phone-alt"></i> <a href="tel:+919025212559" class="text-white text-decoration-none">+91 9025212559</a>
+                    <i class="fas fa-phone-alt me-2"></i> <a href="tel:+919025212559" class="text-white text-decoration-none">+91 9025212559</a>
                 </div>
-                <div class="col-md-6 text-end">
-                    <i class="fas fa-envelope"></i> <a href="mailto:balajimani1935@gmail.com" class="text-white text-decoration-none">balajimani1935@gmail.com</a>
+                <div class="col-md-6 text-md-end text-center mt-2 mt-md-0">
+                    <i class="fas fa-envelope me-2"></i> <a href="mailto:balajimani1935@gmail.com" class="text-white text-decoration-none">balajimani1935@gmail.com</a>
                 </div>
             </div>
         </div>
@@ -362,7 +1046,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#home">
                 <i class="fas fa-home"></i> Salem Housing Loan Agency
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -370,7 +1054,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#calculator">EMI Calculator</a></li>
                     <li class="nav-item"><a class="nav-link" href="#cibil">CIBIL Check</a></li>
                     <li class="nav-item"><a class="nav-link" href="#loans">Loan Types</a></li>
@@ -384,68 +1068,70 @@
     <section class="hero-section" id="home">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 hero-content">
+                <div class="col-lg-6 hero-content" data-aos="fade-up">
                     <h1 class="hero-title">Your Dream Home Awaits</h1>
-                    <p class="lead mb-4">Get instant home loans with competitive interest rates. Quick approval, minimal documentation, and hassle-free process in Salem.</p>
-                    <a href="#apply" class="btn btn-light btn-lg px-5 py-3 rounded-pill">
+                    <p class="hero-subtitle">Get instant home loans with competitive interest rates. Quick approval, minimal documentation, and hassle-free process in Salem.</p>
+                    <a href="#apply" class="btn btn-light btn-hero">
                         <i class="fas fa-file-alt me-2"></i> Apply Now
                     </a>
                 </div>
-                <div class="col-lg-6 text-center">
-                    <i class="fas fa-house-user" style="font-size: 15rem; opacity: 0.2;"></i>
+                <div class="col-lg-6">
+                    <div class="hero-image" data-aos="fade-left">
+                        <i class="fas fa-house-user"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features-section">
+    <section class="features-section" id="features">
         <div class="container">
-            <div class="text-center mb-5">
+            <div class="section-header" data-aos="fade-up">
                 <h2 class="section-title">Why Choose Us</h2>
-                <p class="text-muted">Experience the best loan services in Salem</p>
+                <p class="section-subtitle">Experience the best loan services in Salem with our customer-centric approach</p>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="feature-card">
                         <i class="fas fa-bolt feature-icon"></i>
-                        <h4>Quick Approval</h4>
-                        <p>Get loan approval within 24 hours with minimal documentation</p>
+                        <h4 class="feature-title">Quick Approval</h4>
+                        <p class="feature-description">Get loan approval within 24 hours with minimal documentation</p>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="feature-card">
                         <i class="fas fa-percent feature-icon"></i>
-                        <h4>Low Interest Rates</h4>
-                        <p>Competitive interest rates starting from 8.5% per annum</p>
+                        <h4 class="feature-title">Low Interest Rates</h4>
+                        <p class="feature-description">Competitive interest rates starting from 8.5% per annum</p>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="feature-card">
                         <i class="fas fa-shield-alt feature-icon"></i>
-                        <h4>Secure Process</h4>
-                        <p>100% secure and transparent loan processing</p>
+                        <h4 class="feature-title">Secure Process</h4>
+                        <p class="feature-description">100% secure and transparent loan processing</p>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
                     <div class="feature-card">
                         <i class="fas fa-users feature-icon"></i>
-                        <h4>Expert Guidance</h4>
-                        <p>Dedicated relationship managers to assist you</p>
+                        <h4 class="feature-title">Expert Guidance</h4>
+                        <p class="feature-description">Dedicated relationship managers to assist you</p>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
                     <div class="feature-card">
                         <i class="fas fa-calculator feature-icon"></i>
-                        <h4>Flexible Tenure</h4>
-                        <p>Loan tenure from 1 to 30 years based on your needs</p>
+                        <h4 class="feature-title">Flexible Tenure</h4>
+                        <p class="feature-description">Loan tenure from 1 to 30 years based on your needs</p>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="600">
                     <div class="feature-card">
                         <i class="fas fa-mobile-alt feature-icon"></i>
-                        <h4>Digital Process</h4>
-                        <p>Apply online from anywhere, anytime</p>
+                        <h4 class="feature-title">Digital Process</h4>
+                        <p class="feature-description">Apply online from anywhere, anytime</p>
                     </div>
                 </div>
             </div>
@@ -455,13 +1141,13 @@
     <!-- EMI Calculator Section -->
     <section class="calculator-section" id="calculator">
         <div class="container">
-            <div class="text-center mb-5">
+            <div class="section-header" data-aos="fade-up">
                 <h2 class="section-title">EMI Calculator</h2>
-                <p class="text-muted">Calculate your monthly EMI instantly</p>
+                <p class="section-subtitle">Calculate your monthly EMI instantly with our easy-to-use calculator</p>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="calculator-card">
+                    <div class="calculator-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="mb-4">
                             <label class="form-label">Loan Amount (₹)</label>
                             <div class="input-group">
@@ -493,23 +1179,29 @@
                             </div>
                         </div>
                         
-                        <button class="btn btn-primary w-100 mb-3" onclick="calculateEMI()">
+                        <button class="btn btn-primary btn-calculate w-100" onclick="calculateEMI()">
                             <i class="fas fa-calculator me-2"></i> Calculate EMI
                         </button>
                         
                         <div class="result-card">
-                            <div class="row text-center">
+                            <div class="row">
                                 <div class="col-md-4">
-                                    <h6>Monthly EMI</h6>
-                                    <div class="result-value" id="emiResult">₹0</div>
+                                    <div class="result-item">
+                                        <div class="result-label">Monthly EMI</div>
+                                        <div class="result-value" id="emiResult">₹0</div>
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <h6>Total Interest</h6>
-                                    <div class="result-value" id="totalInterest">₹0</div>
+                                    <div class="result-item">
+                                        <div class="result-label">Total Interest</div>
+                                        <div class="result-value" id="totalInterest">₹0</div>
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <h6>Total Amount</h6>
-                                    <div class="result-value" id="totalAmount">₹0</div>
+                                    <div class="result-item">
+                                        <div class="result-label">Total Amount</div>
+                                        <div class="result-value" id="totalAmount">₹0</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -522,14 +1214,14 @@
     <!-- CIBIL Check Section -->
     <section class="cibil-section" id="cibil">
         <div class="container">
-            <div class="text-center mb-5">
+            <div class="section-header" data-aos="fade-up">
                 <h2 class="section-title">Check Your CIBIL Score</h2>
-                <p class="text-muted">Know your credit score for better loan eligibility</p>
+                <p class="section-subtitle">Know your credit score for better loan eligibility</p>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="cibil-card">
-                        <form id="cibilForm" action="https://formspree.io/f/mrbyyndq" method="POST">
+                    <div class="cibil-card" data-aos="fade-up" data-aos-delay="200">
+                        <form id="cibilForm" class="cibil-form">
                             <div class="mb-3">
                                 <label class="form-label">Full Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="name" id="cibilName" required placeholder="Enter your full name">
@@ -555,23 +1247,29 @@
                                 <input type="email" class="form-control" name="email" id="cibilEmail" placeholder="your.email@example.com">
                             </div>
                             
-                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                            <button type="submit" class="btn btn-primary btn-cibil w-100">
                                 <i class="fas fa-search me-2"></i> Check CIBIL Score
                             </button>
                         </form>
                         
-                        <div id="cibilSuccessMessage" class="alert alert-success mt-4" style="display: none;">
-                            <i class="fas fa-check-circle me-2"></i> Your CIBIL check request has been submitted successfully. We will contact you soon with your credit score report.
-                        </div>
-                        
-                        <div class="mt-4">
-                            <h6>Score Interpretation:</h6>
-                            <ul class="list-unstyled mt-3">
-                                <li><i class="fas fa-check-circle text-success me-2"></i> 750-900: Excellent (High loan approval chances)</li>
-                                <li><i class="fas fa-check-circle text-info me-2"></i> 650-749: Good (Fair loan approval chances)</li>
-                                <li><i class="fas fa-exclamation-triangle text-warning me-2"></i> 550-649: Average (Moderate approval chances)</li>
-                                <li><i class="fas fa-times-circle text-danger me-2"></i> Below 550: Poor (Low approval chances)</li>
-                            </ul>
+                        <div class="score-interpretation">
+                            <h5 class="mb-3">Score Interpretation:</h5>
+                            <div class="score-item">
+                                <i class="fas fa-check-circle score-excellent"></i>
+                                <div>750-900: Excellent (High loan approval chances)</div>
+                            </div>
+                            <div class="score-item">
+                                <i class="fas fa-check-circle score-good"></i>
+                                <div>650-749: Good (Fair loan approval chances)</div>
+                            </div>
+                            <div class="score-item">
+                                <i class="fas fa-exclamation-triangle score-average"></i>
+                                <div>550-649: Average (Moderate approval chances)</div>
+                            </div>
+                            <div class="score-item">
+                                <i class="fas fa-times-circle score-poor"></i>
+                                <div>Below 550: Poor (Low approval chances)</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -582,88 +1280,90 @@
     <!-- Loan Types Table Section -->
     <section class="loan-table-section" id="loans">
         <div class="container">
-            <div class="text-center mb-5">
+            <div class="section-header" data-aos="fade-up">
                 <h2 class="section-title">Our Loan Products</h2>
-                <p class="text-muted">Choose the perfect loan for your needs</p>
+                <p class="section-subtitle">Choose the perfect loan for your needs</p>
             </div>
-            <div class="table-responsive">
-                <table class="table custom-table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Loan Type</th>
-                            <th>Interest Rate</th>
-                            <th>Maximum Amount</th>
-                            <th>Tenure</th>
-                            <th>Processing Fee</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><i class="fas fa-home text-primary me-2"></i> Home Loan</td>
-                            <td>8.5% - 10.5%</td>
-                            <td>₹1 Crore</td>
-                            <td>Up to 30 years</td>
-                            <td>0.5% - 1%</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-building text-success me-2"></i> Plot Loan</td>
-                            <td>9.0% - 11.0%</td>
-                            <td>₹50 Lakhs</td>
-                            <td>Up to 15 years</td>
-                            <td>1% - 1.5%</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-tools text-warning me-2"></i> Construction Loan</td>
-                            <td>9.5% - 11.5%</td>
-                            <td>₹75 Lakhs</td>
-                            <td>Up to 20 years</td>
-                            <td>0.5% - 1%</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-key text-info me-2"></i> Property Purchase</td>
-                            <td>8.75% - 10.75%</td>
-                            <td>₹1 Crore</td>
-                            <td>Up to 25 years</td>
-                            <td>0.5% - 1%</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-hand-holding-usd text-danger me-2"></i> Loan Against Property</td>
-                            <td>10.0% - 12.0%</td>
-                            <td>₹50 Lakhs</td>
-                            <td>Up to 15 years</td>
-                            <td>1% - 2%</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-sync-alt text-secondary me-2"></i> Balance Transfer</td>
-                            <td>8.25% - 10.25%</td>
-                            <td>Existing Loan Amount</td>
-                            <td>Remaining Tenure</td>
-                            <td>0.25% - 0.5%</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="table-container" data-aos="fade-up" data-aos-delay="200">
+                <div class="table-responsive">
+                    <table class="table custom-table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Loan Type</th>
+                                <th>Interest Rate</th>
+                                <th>Maximum Amount</th>
+                                <th>Tenure</th>
+                                <th>Processing Fee</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><i class="fas fa-home loan-icon text-primary"></i> Home Loan</td>
+                                <td>8.5% - 10.5%</td>
+                                <td>₹1 Crore</td>
+                                <td>Up to 30 years</td>
+                                <td>0.5% - 1%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-building loan-icon text-success"></i> Plot Loan</td>
+                                <td>9.0% - 11.0%</td>
+                                <td>₹50 Lakhs</td>
+                                <td>Up to 15 years</td>
+                                <td>1% - 1.5%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-tools loan-icon text-warning"></i> Construction Loan</td>
+                                <td>9.5% - 11.5%</td>
+                                <td>₹75 Lakhs</td>
+                                <td>Up to 20 years</td>
+                                <td>0.5% - 1%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-key loan-icon text-info"></i> Property Purchase</td>
+                                <td>8.75% - 10.75%</td>
+                                <td>₹1 Crore</td>
+                                <td>Up to 25 years</td>
+                                <td>0.5% - 1%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-hand-holding-usd loan-icon text-danger"></i> Loan Against Property</td>
+                                <td>10.0% - 12.0%</td>
+                                <td>₹50 Lakhs</td>
+                                <td>Up to 15 years</td>
+                                <td>1% - 2%</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-sync-alt loan-icon text-secondary"></i> Balance Transfer</td>
+                                <td>8.25% - 10.25%</td>
+                                <td>Existing Loan Amount</td>
+                                <td>Remaining Tenure</td>
+                                <td>0.25% - 0.5%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             
             <div class="row mt-5">
-                <div class="col-md-6">
-                    <div class="contact-info">
-                        <h5 class="mb-4">Required Documents</h5>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> PAN Card & Aadhaar Card</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Last 6 months Bank Statement</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Income Proof (Salary Slip/ITR)</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Property Documents</li>
-                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Passport Size Photographs</li>
+                <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="info-card">
+                        <h5 class="info-title">Required Documents</h5>
+                        <ul class="info-list">
+                            <li><i class="fas fa-check-circle"></i> PAN Card & Aadhaar Card</li>
+                            <li><i class="fas fa-check-circle"></i> Last 6 months Bank Statement</li>
+                            <li><i class="fas fa-check-circle"></i> Income Proof (Salary Slip/ITR)</li>
+                            <li><i class="fas fa-check-circle"></i> Property Documents</li>
+                            <li><i class="fas fa-check-circle"></i> Passport Size Photographs</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="contact-info">
-                        <h5 class="mb-4">Eligibility Criteria</h5>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-user text-primary me-2"></i> Age: 21 to 65 years</li>
-                            <li class="mb-2"><i class="fas fa-briefcase text-primary me-2"></i> Salaried or Self-employed</li>
-                            <li class="mb-2"><i class="fas fa-chart-line text-primary me-2"></i> CIBIL Score: 650+</li>
+                <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="info-card">
+                        <h5 class="info-title">Eligibility Criteria</h5>
+                        <ul class="info-list">
+                            <li><i class="fas fa-user"></i> Age: 21 to 65 years</li>
+                            <li><i class="fas fa-briefcase"></i> Salaried or Self-employed</li>
+                            <li><i class="fas fa-chart-line"></i> CIBIL Score: 650+</li>
                         </ul>
                     </div>
                 </div>
@@ -674,13 +1374,13 @@
     <!-- Application Form Section -->
     <section class="application-section" id="apply">
         <div class="container">
-            <div class="text-center mb-5">
+            <div class="section-header" data-aos="fade-up">
                 <h2 class="section-title text-white">Apply for Loan</h2>
-                <p class="text-white">Fill the form below and our team will contact you soon</p>
+                <p class="section-subtitle text-white">Fill the form below and our team will contact you soon</p>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="application-form">
+                    <div class="application-form" data-aos="fade-up" data-aos-delay="200">
                         <form id="loanApplicationForm" action="https://formspree.io/f/xovkkgpg" method="POST">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
@@ -751,14 +1451,10 @@
                                 </label>
                             </div>
                             
-                            <button type="submit" class="btn btn-submit btn-primary w-100">
+                            <button type="submit" class="btn btn-primary btn-submit">
                                 <i class="fas fa-paper-plane me-2"></i> Submit Application
                             </button>
                         </form>
-                        
-                        <div id="successMessage" class="alert alert-success mt-4" style="display: none;">
-                            <i class="fas fa-check-circle me-2"></i> Thank you! Your application has been submitted successfully. We will contact you soon.
-                        </div>
                     </div>
                 </div>
             </div>
@@ -766,95 +1462,139 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="py-5 bg-light">
+    <section class="contact-section" id="contact">
         <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">Get in touch with us for any queries</p>
+            </div>
             <div class="row">
-                <div class="col-md-4 text-center mb-4">
-                    <div class="contact-item justify-content-center">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contact-card">
                         <i class="fas fa-map-marker-alt contact-icon"></i>
-                        <div>
-                            <h6>Location</h6>
-                            <p class="text-muted mb-0">Salem, Tamil Nadu</p>
-                        </div>
+                        <h5 class="contact-title">Location</h5>
+                        <p class="contact-info">Tharamangalam Main Road, Omalur, Salem, Tamil Nadu 636455</p>
                     </div>
                 </div>
-                <div class="col-md-4 text-center mb-4">
-                    <div class="contact-item justify-content-center">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-card">
                         <i class="fas fa-phone contact-icon"></i>
-                        <div>
-                            <h6>Call Us</h6>
-                            <p class="mb-0"><a href="tel:+919025212559" class="text-decoration-none">+91 9025212559</a></p>
-                        </div>
+                        <h5 class="contact-title">Call Us</h5>
+                        <p class="contact-info"><a href="tel:+919025212559">+91 9025212559</a></p>
                     </div>
                 </div>
-                <div class="col-md-4 text-center mb-4">
-                    <div class="contact-item justify-content-center">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="contact-card">
                         <i class="fas fa-envelope contact-icon"></i>
-                        <div>
-                            <h6>Email Us</h6>
-                            <p class="mb-0"><a href="mailto:balajimani1935@gmail.com" class="text-decoration-none">balajimani1935@gmail.com</a></p>
-                        </div>
+                        <h5 class="contact-title">Email Us</h5>
+                        <p class="contact-info"><a href="mailto:balajimani1935@gmail.com">balajimani1935@gmail.com</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-	
-	<center>
-	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3906.48628185097!2d78.0254123134918!3d11.730752719010114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babf942ba12e101%3A0x449f0a94fa8ffcc5!2sMettur%20Main%20Rd%2C%20Omalur%2C%20Tamil%20Nadu%20636455!5e0!3m2!1sen!2sin!4v1760336715507!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-	</center>
+    
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3906.48628185097!2d78.0254123134918!3d11.730752719010114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babf942ba12e101%3A0x449f0a94fa8ffcc5!2sMettur%20Main%20Rd%2C%20Omalur%2C%20Tamil%20Nadu%20636455!5e0!3m2!1sen!2sin!4v1760336715507!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 mb-4">
-                    <h5 class="mb-3">Salem Housing Loan Agency</h5>
-                    <p class="text-muted">Your trusted partner for all housing loan needs in Salem. We provide quick, transparent, and hassle-free loan services.</p>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <h5 class="mb-3">Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#home">Home</a></li>
-                        <li class="mb-2"><a href="#calculator">EMI Calculator</a></li>
-                        <li class="mb-2"><a href="#cibil">CIBIL Check</a></li>
-                        <li class="mb-2"><a href="#loans">Loan Products</a></li>
-                        <li class="mb-2"><a href="#apply">Apply Now</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <h5 class="mb-3">Connect With Us</h5>
-                    <p class="text-muted">Contact: <a href="tel:+919025212559">+91 9025212559</a></p>
-                    <p class="text-muted">Email: <a href="mailto:balajimani1935@gmail.com">balajimani1935@gmail.com</a></p>
-                    <div class="mt-3">
-                        <a href="https://wa.me/919025212559?text=%F0%9F%8F%A6%20*Salem%20Housing%20Loan%20Agency*%0A%F0%9F%91%8BHi%20Team%2C%0AI'm%20interested%20in%20applying%20for%20a%20housing%20loan.%0A%0A%F0%9F%93%9B%20Name%3A%20%5BYour%20Name%5D%0A%F0%9F%93%B1%20Mobile%3A%20%5BYour%20Mobile%20Number%5D%0A%F0%9F%92%B0%20Loan%20Required%3A%20%E2%82%B9%5BAmount%5D%0A%F0%9F%8F%A0%20Address%3A%20%5BYour%20Address%5D%0A%0APlease%20share%20the%20eligibility%20details%20and%20next%20steps.%0AThank%20you!%20%F0%9F%99%8F" 
-						   target="_blank" 
-						   class="text-white me-3" 
-						   title="Chat on WhatsApp">
-						   <i class="fab fa-whatsapp fa-2x"></i>
-						</a>
-                        <a href="https://www.instagram.com/salem_housing_loan_agency" class="text-white me-3"><i class="fab fa-instagram fa-2x"></i></a>
+                <div class="col-lg-4 mb-4">
+                    <h3 class="footer-brand">Salem Housing Loan Agency</h3>
+                    <p class="footer-description">Your trusted partner for all housing loan needs in Salem. We provide quick, transparent, and hassle-free loan services.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/919025212559?text=%F0%9F%8F%A6%20*Salem%20Housing%20Loan%20Agency*%0A%F0%9F%91%8BHi%20Team%2C%0AI'm%20interested%20in%20applying%20for%20a%20housing%20loan.%0A%0A%F0%9F%93%9B%20Name%3A%20%5BYour%20Name%5D%0A%F0%9F%93%B1%20Mobile%3A%20%5BYour%20Mobile%20Number%5D%0A%F0%9F%92%B0%20Loan%20Required%3A%20%E2%82%B9%5BAmount%5D%0A%F0%9F%8F%A0%20Address%3A%20%5BYour%20Address%5D%0A%0APlease%20share%20the%20eligibility%20details%20and%20next%20steps.%0AThank%20you!%20%F0%9F%99%8F" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.instagram.com/salem_housing_loan_agency" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
                     </div>
                 </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+                        <li><a href="#calculator"><i class="fas fa-chevron-right me-2"></i>EMI Calculator</a></li>
+                        <li><a href="#cibil"><i class="fas fa-chevron-right me-2"></i>CIBIL Check</a></li>
+                        <li><a href="#loans"><i class="fas fa-chevron-right me-2"></i>Loan Products</a></li>
+                        <li><a href="#apply"><i class="fas fa-chevron-right me-2"></i>Apply Now</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right me-2"></i>Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="footer-title">Contact Info</h5>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt me-2"></i>Tharamangalam Main Road, Omalur, Salem</li>
+                        <li><i class="fas fa-phone me-2"></i><a href="tel:+919025212559">+91 9025212559</a></li>
+                        <li><i class="fas fa-envelope me-2"></i><a href="mailto:balajimani1935@gmail.com">balajimani1935@gmail.com</a></li>
+                        <li><i class="fas fa-clock me-2"></i>Mon-Sat: 09:00 AM - 06:00 PM</li>
+                    </ul>
+                </div>
             </div>
-            <hr class="bg-secondary">
-            <div class="text-center">
-                <p class="mb-0">&copy; 2025 Salem Housing Loan Agency. All rights reserved. | Designed for Best Loan Services in Salem</p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Salem Housing Loan Agency. All rights reserved. | Designed for Best Loan Services in Salem</p>
             </div>
         </div>
     </footer>
 
     <!-- Scroll to Top Button -->
-    <button id="scrollTop" class="btn btn-primary" style="position: fixed; bottom: 20px; right: 20px; display: none; z-index: 999; border-radius: 50%; width: 50px; height: 50px;">
+    <div class="scroll-top" id="scrollTop">
         <i class="fas fa-arrow-up"></i>
-    </button>
+    </div>
+    
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <div class="fab-tooltip">Chat on WhatsApp</div>
+        <a href="https://wa.me/919025212559?text=%F0%9F%8F%A6%20*Salem%20Housing%20Loan%20Agency*%0A%F0%9F%91%8BHi%20Team%2C%0AI'm%20interested%20in%20applying%20for%20a%20housing%20loan.%0A%0A%F0%9F%93%9B%20Name%3A%20%5BYour%20Name%5D%0A%F0%9F%93%B1%20Mobile%3A%20%5BYour%20Mobile%20Number%5D%0A%F0%9F%92%B0%20Loan%20Required%3A%20%E2%82%B9%5BAmount%5D%0A%F0%9F%8F%A0%20Address%3A%20%5BYour%20Address%5D%0A%0APlease%20share%20the%20eligibility%20details%20and%20next%20steps.%0AThank%20you!%20%F0%9F%99%8F" target="_blank" class="fab-button">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+    
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <div class="success-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="success-content">
+            <h5>Success!</h5>
+            <p>Your form has been submitted successfully. We will contact you soon.</p>
+        </div>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+        
+        // Preloader
+        $(window).on('load', function() {
+            setTimeout(function() {
+                $('.preloader').addClass('fade-out');
+            }, 500);
+        });
+        
         // EMI Calculator Function
         function calculateEMI() {
             const principal = parseFloat($('#loanAmount').val());
@@ -864,7 +1604,7 @@
             
             // Validate inputs
             if (!principal || !annualRate || !tenure) {
-                alert('Please fill all calculator fields');
+                showNotification('Please fill all calculator fields', 'error');
                 return;
             }
             
@@ -885,40 +1625,149 @@
             $('#totalAmount').text('₹' + Math.round(totalAmount).toLocaleString('en-IN'));
         }
         
-        // CIBIL Form Submission
+        // CIBIL Form Submission with JavaScript
         $('#cibilForm').on('submit', function(e) {
-            // Let the form submit naturally to Formspree
-            // Show success message after submission
-            setTimeout(function() {
-                $('#successMessage').fadeIn();
-                $('#loanApplicationForm')[0].reset();
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = $(this).find('button[type="submit"]');
+            const originalText = submitBtn.html();
+            submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i> Processing...').prop('disabled', true);
+            
+            // Get form data
+            const formData = {
+                name: $('#cibilName').val(),
+                pan: $('#panNumber').val(),
+                dob: $('#dob').val(),
+                mobile: $('#cibilMobile').val(),
+                email: $('#cibilEmail').val()
+            };
+            
+            // Submit form using fetch API
+            fetch('https://formspree.io/f/mrbyyndq', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Reset form
+                $('#cibilForm')[0].reset();
                 
-                // Hide success message after 5 seconds
-                setTimeout(function() {
-                    $('#successMessage').fadeOut();
-                }, 5000);
-            }, 1000);
+                // Reset button
+                submitBtn.html(originalText).prop('disabled', false);
+                
+                // Show success message
+                showNotification('Your CIBIL check request has been submitted successfully. We will contact you soon with your credit score report.');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                
+                // Reset button
+                submitBtn.html(originalText).prop('disabled', false);
+                
+                // Show error message
+                showNotification('There was an error submitting your request. Please try again.', 'error');
+            });
         });
         
         // Loan Application Form Submission
         $('#loanApplicationForm').on('submit', function(e) {
-            // Let the form submit naturally to Formspree
-            // Show success message after submission
-            setTimeout(function() {
-                $('#successMessage').fadeIn();
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = $(this).find('button[type="submit"]');
+            const originalText = submitBtn.html();
+            submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i> Processing...').prop('disabled', true);
+            
+            // Get form data
+            const formData = {
+                name: $(this).find('input[name="name"]').val(),
+                mobile: $(this).find('input[name="mobile"]').val(),
+                email: $(this).find('input[name="email"]').val(),
+                address: $(this).find('textarea[name="address"]').val(),
+                loanType: $(this).find('select[name="loanType"]').val(),
+                loanAmount: $(this).find('input[name="loanAmount"]').val(),
+                monthlyIncome: $(this).find('input[name="monthlyIncome"]').val(),
+                employmentType: $(this).find('select[name="employmentType"]').val(),
+                additionalInfo: $(this).find('textarea[name="additionalInfo"]').val()
+            };
+            
+            // Submit form using fetch API
+            fetch('https://formspree.io/f/xovkkgpg', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Reset form
                 $('#loanApplicationForm')[0].reset();
                 
-                // Hide success message after 5 seconds
-                setTimeout(function() {
-                    $('#successMessage').fadeOut();
-                }, 5000);
-            }, 1000);
+                // Reset button
+                submitBtn.html(originalText).prop('disabled', false);
+                
+                // Show success message
+                showNotification('Thank you! Your application has been submitted successfully. We will contact you soon.');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                
+                // Reset button
+                submitBtn.html(originalText).prop('disabled', false);
+                
+                // Show error message
+                showNotification('There was an error submitting your application. Please try again.', 'error');
+            });
+        });
+        
+        // Show notification function
+        function showNotification(message, type = 'success') {
+            const successMessage = $('#successMessage');
+            const iconClass = type === 'success' ? 'fa-check' : 'fa-exclamation-triangle';
+            const iconBg = type === 'success' ? '#28a745' : '#dc3545';
+            
+            successMessage.find('.success-icon').css('background', iconBg).html(`<i class="fas ${iconClass}"></i>`);
+            successMessage.find('.success-content h5').text(type === 'success' ? 'Success!' : 'Error!');
+            successMessage.find('.success-content p').text(message);
+            
+            successMessage.addClass('show');
+            
+            // Hide message after 5 seconds
+            setTimeout(function() {
+                successMessage.removeClass('show');
+            }, 5000);
+        }
+        
+        // Navbar scroll effect
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.navbar').addClass('scrolled');
+            } else {
+                $('.navbar').removeClass('scrolled');
+            }
         });
         
         // Smooth Scrolling
         $('a[href^="#"]').on('click', function(e) {
             e.preventDefault();
-            const target = $(this.getAttribute('href'));
+            const target = $(this).getAttribute('href');
             if (target.length) {
                 $('html, body').stop().animate({
                     scrollTop: target.offset().top - 70
@@ -926,12 +1775,29 @@
             }
         });
         
+        // Active navigation link
+        $(window).scroll(function() {
+            const scrollPosition = $(this).scrollTop();
+            
+            // Check each section and update active nav link
+            $('section').each(function() {
+                const target = $(this).attr('id');
+                const offset = $(this).offset().top - 100;
+                const height = $(this).outerHeight();
+                
+                if (scrollPosition >= offset && scrollPosition < offset + height) {
+                    $('.navbar-nav .nav-link').removeClass('active');
+                    $(`.navbar-nav .nav-link[href="#${target}"]`).addClass('active');
+                }
+            });
+        });
+        
         // Scroll to Top Button
         $(window).scroll(function() {
             if ($(this).scrollTop() > 300) {
-                $('#scrollTop').fadeIn();
+                $('#scrollTop').addClass('active');
             } else {
-                $('#scrollTop').fadeOut();
+                $('#scrollTop').removeClass('active');
             }
         });
         
